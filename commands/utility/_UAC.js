@@ -178,7 +178,7 @@ export function getUserDetails(socket) {
 export function verifyNickname(nick) {
   if (typeof nick === 'undefined') return false;
 
-  return /^[a-zA-Z0-9_]{1,24}$/.test(nick);
+  return /^[\u4e00-\u9fa5a-zA-Z0-9_]{1,24}$/.test(nick);
 }
 
 /**

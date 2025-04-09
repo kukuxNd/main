@@ -15,7 +15,7 @@ module.exports = {
   }, {
     name: 'hackchat-httpd',
     script: './node_modules/http-server/bin/http-server',
-    args: './client -p 3000 -o',
+    args: './client -p 80 -o',
     instances: 1,
     autorestart: true,
     watch: false,
