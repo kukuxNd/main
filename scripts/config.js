@@ -191,8 +191,6 @@ const setupChannels = async () => {
     const channelHash = getChannelHash(config.data.publicChannels[i]);
     const configPath = `./channels/${channelHash[0]}/${channelHash}.json`;
 
-    console.log(`Storing ${config.data.publicChannels[i]} -> ${configPath}`);
-
     writeFileSync(configPath, JSON.stringify(channelSettings));
   }
 

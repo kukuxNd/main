@@ -86,6 +86,11 @@ export function addActiveMessage(customId, userid) {
 export async function run({
   core, server, socket, payload,
 }) {
+  // must be in a channel to run this command
+  if (typeof socket.channel === 'undefined') {
+    return server.police.frisk(socket, 1);
+  }
+
   // check user input
   const text = parseText(payload.text);
 
@@ -173,6 +178,10 @@ export function initHooks(server) {
 export function commandCheckIn({ server, socket, payload }) {
   if (typeof payload.text !== 'string') {
     return false;
+  }
+
+  if (payload.text.startsWith('/shrug')) {
+    payload.text = payload.text.replace('/shrug', String.fromCharCode(175)+String.fromCharCode(92)+String.fromCharCode(92)+String.fromCharCode(92)+String.fromCharCode(95)+String.fromCharCode(40)+String.fromCharCode(12484)+String.fromCharCode(41)+String.fromCharCode(92)+String.fromCharCode(95)+String.fromCharCode(47)+String.fromCharCode(175));
   }
 
   if (payload.text.startsWith('/myhash')) {

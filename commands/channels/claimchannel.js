@@ -39,7 +39,7 @@ export async function run({
   if (!socket.trip) {
     return server.reply({
       cmd: 'warn',
-      text: 'Failed to run command: Missing trip code.',
+      text: 'Failed to run command: You must have a trip code to do this.',
       id: Errors.Global.MISSING_TRIPCODE,
       channel: socket.channel, // @todo Multichannel
     }, socket);
@@ -134,6 +134,8 @@ export function chatHook({
       channelSettings.ownerTrip = socket.trip;
 
       updateChannelSettings(core.appConfig.data, socket.channel, channelSettings);
+
+      console.log(`[${socket.trip}]${socket.nick} claimed ?${socket.channel}`);
 
       server.broadcast({
         cmd: 'info', // @todo Add numeric info code as `id`

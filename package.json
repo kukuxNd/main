@@ -23,7 +23,7 @@
     "config": "node ./scripts/config.js",
     "lint": "eslint -- . ",
     "lint:fix": "eslint --fix -- . ",
-    "test_run": "cls && npm run refresh && npm start && npm run logs && npm run stop",
+    "test_run": "clear && npm run refresh && npm start && npm run logs && npm run stop",
     "test": "npm run lint && c8 mocha --exit ./test/*.test.js",
     "makedocs": "jsdoc -c jsdoc.json"
   },
@@ -32,7 +32,7 @@
   "dependencies": {
     "ascii-captcha": "^0.0.3",
     "enquirer": "^2.3.6",
-    "hackchat-server": "^2.3.1",
+    "hackchat-server": "^2.3.2",
     "http-server": "^14.1.0",
     "jsonwebtoken": "^9.0.2",
     "lowdb": "^3.0.0",
@@ -45,7 +45,7 @@
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "mocha": "^9.2.1",
+    "mocha": "^11.1.0",
     "nyc": "^15.1.0"
   }
 }

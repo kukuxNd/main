@@ -11,6 +11,7 @@ import {
   isModerator,
   levels,
   getUserDetails,
+  getAppearance,
 } from '../utility/_UAC.js';
 
 /**
@@ -33,6 +34,8 @@ export async function run({
     (mod) => mod.trip !== payload.trip,
   );
 
+  const { color, flair } = getAppearance(levels.default);
+
   // find targets current connections
   const targetMod = server.findSockets({ trip: payload.trip });
   if (targetMod.length !== 0) {
@@ -50,6 +53,8 @@ export async function run({
       // downgrade privileges
       targetMod[i].uType = 'user';
       targetMod[i].level = levels.default;
+      targetMod[i].color = color;
+      targetMod[i].flair = flair;
 
       // inform ex-mod
       server.send({

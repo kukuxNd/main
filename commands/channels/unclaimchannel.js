@@ -10,6 +10,7 @@ import {
   isModerator,
   getUserDetails,
   levels,
+  getAppearance,
 } from '../utility/_UAC.js';
 import {
   Errors,
@@ -36,7 +37,7 @@ export async function run({
   if (!socket.trip) {
     return server.reply({
       cmd: 'warn',
-      text: 'Failed to run command: Missing trip code.',
+      text: 'Failed to run command: You must have a trip code to do this.',
       id: Errors.Global.MISSING_TRIPCODE,
       channel: socket.channel, // @todo Multichannel
     }, socket);
@@ -74,9 +75,13 @@ export async function run({
     channel: socket.channel,
   });
 
+  const { color, flair } = getAppearance(levels.default);
+
   for (let i = 0, j = targetClients.length; i < j; i += 1) {
     if (!isModerator(targetClients[i].level)) {
       targetClients[i].level = levels.default;
+      targetClients[i].color = color;
+      targetClients[i].flair = flair;
 
       server.broadcast({
         ...getUserDetails(targetClients[i]),
@@ -87,6 +92,8 @@ export async function run({
       }, { channel: socket.channel });
     }
   }
+
+  console.log(`[${socket.trip}]${socket.nick} UNCLAIMED ?${socket.channel}`);
 
   return true;
 }
